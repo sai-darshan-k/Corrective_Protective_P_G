@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KrishiPro App Solution - Complete Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #f8f9fa;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #27ae60, #229954);
+            color: white;
+            padding: 2.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .crop-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .crop-btn {
+            padding: 0.8rem 2rem;
+            background: white;
+            border: 2px solid #27ae60;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #27ae60;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .crop-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .crop-btn.active {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .crop-content {
+            display: none;
+        }
+        
+        .crop-content.active {
+            display: block;
+            animation: fadeIn 0.4s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .section-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: #27ae60;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #27ae60;
+        }
+        
+        .stage-container {
+            margin-bottom: 2.5rem;
+        }
+        
+        .stage-header {
+            background: linear-gradient(to right, #e8f5e9, #c8e6c9);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 5px solid #27ae60;
+        }
+        
+        .stage-header h3 {
+            color: #1b5e20;
+            font-size: 1.3rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .stage-header p {
+            color: #558b2f;
+            font-size: 0.95rem;
+        }
+        
+        .measure-section {
+            margin-top: 1.5rem;
+        }
+        
+        .measure-type-header {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        
+        .protective-header {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .corrective-header {
+            background: #fff3e0;
+            color: #e65100;
+        }
+        
+        .feature-box {
+            background: #fafafa;
+            border-left: 4px solid #27ae60;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+        }
+        
+        .feature-box h4 {
+            color: #27ae60;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .feature-box p {
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-box ul {
+            margin-left: 1.5rem;
+            color: #666;
+        }
+        
+        .feature-box li {
+            margin: 0.4rem 0;
+        }
+        
+        .cross-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .feature-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-3px);
+        }
+        
+        .feature-card h4 {
+            color: #27ae60;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+        
+        .feature-card ul {
+            margin-left: 1.2rem;
+            color: #555;
+        }
+        
+        .feature-card li {
+            margin: 0.5rem 0;
+        }
+        
+        .tier-box {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-top: 4px solid #27ae60;
+        }
+        
+        .tier-label {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 15px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .tier-1 { background: #e74c3c; }
+        .tier-2 { background: #f39c12; }
+        .tier-3 { background: #27ae60; }
+        
+        .tier-box h4 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .tier-item {
+            padding: 0.8rem;
+            background: #f8f9fa;
+            margin-bottom: 0.8rem;
+            border-radius: 5px;
+            border-left: 3px solid #27ae60;
+        }
+        
+        .tier-item strong {
+            color: #27ae60;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+        
+        .metrics-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .metric-box {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            border-top: 4px solid #27ae60;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .metric-box h4 {
+            color: #27ae60;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .metric-box .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #e74c3c;
+            margin: 0.5rem 0;
+        }
+        
+        .metric-box p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        th {
+            background: #27ae60;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .flowchart-section {
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .flowchart-section h3 {
+            font-size: 1.5rem;
+            color: #27ae60;
+            margin-bottom: 1.5rem;
+        }
+
+        .flowchart-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .crop-selector {
+                flex-direction: column;
+            }
+            
+            .crop-btn {
+                width: 100%;
+            }
+            
+            .section-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>KrishiPro App Solution</h1>
+        <p>Comprehensive Protective and Corrective Measures for Pomegranate and Grape Farming</p>
+    </div>
+    
+    <div class="container">
+        <div class="crop-selector">
+            <button class="crop-btn active" onclick="showCrop('pomegranate')">Pomegranate</button>
+            <button class="crop-btn" onclick="showCrop('grapes')">Grapes</button>
+            <button class="crop-btn" onclick="showCrop('cross-features')">Cross-Cutting Features</button>
+            <button class="crop-btn" onclick="showCrop('implementation')">Implementation Priority</button>
+            <button class="crop-btn" onclick="showCrop('metrics')">Success Metrics</button>
+        </div>
+        
+        <!-- POMEGRANATE SECTION -->
+        <div id="pomegranate" class="crop-content active">
+            <div class="section-card">
+                <h2 class="section-title">Pomegranate - Stage-wise Management</h2>
+                
+                <!-- STAGE 1: Pruning & Bahar Treatment -->
+                <div class="stage-container">
+                    <div class="stage-header">
+                        <h3>Stage 1: Pruning & Bahar Treatment (June - July)</h3>
+                        <p>Critical foundation stage for crop success</p>
+                    </div>
+                    
+                    <div class="measure-section">
+                        <span class="measure-type-header protective-header">Protective Measures</span>
+                        
+                        <div class="feature-box">
+                            <h4>Crop Calendar Reminders</h4>
+                            <p>Automated alerts for optimal timing:</p>
+                            <ul>
+                                <li>Pruning schedule based on variety and region</li>
+                                <li>Bahar treatment timing for desired harvest period</li>
+                                <li>Weather-based activity planning</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-box">
+                            <h4>Weather Integration</h4>
+                            <p>Prevents pruning during unfavorable conditions:</p>
+                            <ul>
+                                <li>Rainfall alerts to avoid wet-season pruning</li>
+                                <li>Temperature monitoring for optimal bud break</li>
+                                <li>Forecast integration for 7-day planning</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="measure-section">
+                        <span class="measure-type-header corrective-header">Corrective Measures</span>
+                        
+                        <div class="feature-box">
+                            <h4>Daily Activity Log</h4>
+                            <p>Track pruning progress and issues:</p>
+                            <ul>
+                                <li>Record pruning intensity and methods</li>
+                                <li>Log bahar chemicals and dosages used</li>
+                                <li>Document any disease spotted during pruning</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- STAGE 2: Flowering & Fruit Set -->
+                <div class="stage-container">
+                    <div class="stage-header">
+                        <h3>Stage 2: Flowering & Fruit Set (August - September)</h3>
+                        <p>Critical for yield determination</p>
+                    </div>
+                    
+                    <div class="measure-section">
+                        <span class="measure-type-header protective-header">Protective Measures</span>
+                        
+                        <div class="feature-box">
+                            <h4>Weather + Disease Risk Prediction</h4>
+                            <p>Bacterial blight prevention during vulnerable period:</p>
+                            <ul>
+                                <li>High humidity + warm temperature = bacterial blight risk alert</li>
+                                <li>Preventive spray reminders before rain events</li>
+                                <li>Wind alerts affecting pollination</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-box">
+                            <h4>Soil Moisture Monitoring</h4>
+                            <p>Critical for flower retention:</p>
+                            <ul>
+                                <li>Maintains optimal moisture during flowering</li>
+                                <li>Prevents water stress causing flower drop</li>
+                                <li>Automated irrigation triggers</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-box">
+                            <h4>Satellite NDVI Analysis</h4>
+                            <p>Early nutrient deficiency detection:</p>
+                            <ul>
+                                <li>Identifies nitrogen stress before visible symptoms</li>
+                                <li>Detects weak zones requiring targeted nutrition</li>
+                                <li>Monitors overall plant vigor</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="measure-section">
+                        <span class="measure-type-header corrective-header">Corrective Measures</span>
+                        
+                        <div class="feature-box">
+                            <h4>Krishi AI Photo Diagnosis</h4>
+                            <p>Rapid identification and treatment:</p>
+                            <ul>
+                                <li>Upload photos of infected flowers/shoots</li>
+                                <li>AI identifies bacterial blight, powdery mildew</li>
+                                <li>Immediate bactericide/fungicide recommendations</li>
+                                <li>Dosage and application method guidance</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-box">
+                            <h4>Emergency Irrigation Control</h4>
+                            <p>Actuator dashboard for immediate response:</p>
+                            <ul>
+                                <li>Remote activation during sudden heat waves</li>
+                                <li>Zone-specific watering for stressed areas</li>
+                                <li>Prevents flower drop from water stress</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- STAGE 3: Fruit Development -->
+                <div class="stage-container">
+                    <div class="stage-header">
+                        <h3>Stage 3: Fruit Development (October - December)</h3>
+                        <p>Focus on fruit quality and disease prevention</p>
+                    </div>
+                    
+                    <div class="measure-section">
+                        <span class="measure-type-header protective-header">Protective Measures</span>
+                        
+                        <div class="feature-box">
+                            <h4>Anthracnose Risk Management</h4>
+                            <p>Weather-based disease prevention:</p>
+                            <ul>
+                                <li>Humidity + rainfall = high anthracnose risk alerts</li>
+                                <li>Preventive spray schedules before vulnerable periods</li>
+                                <li>Fruit bagging reminders for protection</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-box">
+                            <h4>Precision Irrigation Scheduling</h4>
+                            <p>Balanced water management:</p>
+                            <ul>
+                                <li>Prevents fruit cracking from irregular watering</li>
+                                <li>Soil moisture sensors guide optimal irrigation</li>
+                                <li>Weather forecast integration for planning</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-box">
+                            <h4>Crop Manual Guidance</h4>
+                            <p>Knowledge base access:</p>
+                            <ul>
+                                <li>Fruit thinning recommendations for quality</li>
+                                <li>Nutrient requirements for fruit sizing</li>
+                                <li>Best practices for fruit protection</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="measure-section">
+                        <span class="measure-type-header corrective-header">Corrective Measures</span>
+                        
+                        <div class="feature-box">
+                            <h4>Disease Treatment Protocol</h4>
+                            <p>AI-guided intervention:</p>
+                            <ul>
+                                <li>Photo analysis for anthracnose, fruit spot diseases</li>
+                                <li>Severity assessment and treatment urgency</li>
+                                <li>Targeted spray recommendations</li>
+                                <li>Track treatment effectiveness</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-box">
+                            <h4>Soil Testing Integration</h4>
+                            <p>Correcting nutrient imbalances:</p>
+                            <ul>
+                                <li>Upload lab reports for analysis</li>
+                                <li>Calculates precise fertilizer needs</li>
+                                <li>Addresses micronutrient deficiencies</li>
+                                <li>Prevents fruit quality issues</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- STAGE 4: Pre-Harvest & Harvest -->
+                <div class="stage-container">
+                    <div class="stage-header">
+                        <h3>Stage 4: Pre-Harvest & Harvest (January - March)</h3>
+                        <p>Maximizing yield and market value</p>
+                    </div>
+                    
+                    <div class="measure-section">
+                        <span class="measure-type-header protective-header">Protective Measures</span>
+                        
+                        <div class="feature-box">
+                            <h4>Harvest Timing Optimization</h4>
+                            <p>Market and quality considerations:</p>
+                            <ul>
+                                <li>FPO Connect for real-time market prices</li>
+                                <li>Weather forecast for harvest planning</li>
+                                <li>Fruit maturity stage monitoring</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-box">
+                            <h4>Pre-Harvest Disease Prevention</h4>
+                            <p>Final protective measures:</p>
+                            <ul>
+                                <li>Weather alerts for late-season disease risk</li>
+                                <li>Rain forecasts affecting harvest timing</li>
+                                <li>Storage condition recommendations</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="measure-section">
+                        <span class="measure-type-header corrective-header">Corrective Measures</span>
+                        
+                        <div class="feature-box">
+                            <h4>Post-Season Analysis</h4>
+                            <p>Learning for next cycle:</p>
+                            <ul>
+                                <li>Complete season data review</li>
+                                <li>Yield analysis vs. expected outcomes</li>
+                                <li>Disease pattern identification</li>
+                                <li>Cost-benefit analysis of inputs</li>
+                                <li>Generate improvement plan for next season</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-box">
+                            <h4>Health Score Assessment</h4>
+                            <p>Performance tracking:</p>
+                            <ul>
+                                <li>Overall farm health score calculation</li>
+                                <li>Comparison with previous seasons</li>
+                                <li>Areas needing attention identified</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Added Flowchart for Pomegranate -->
+                                <div class="flowchart-section">
+                    <h3>Pomegranate Growth Stages Flowchart</h3>
+                    <img src="Pomegrannate-Flow.png" alt="Pomegranate Growth Stages Flowchart">
+                </div>
+            </div>
+        </div>
+        
+        <!-- GRAPES SECTION -->
+        <div id="grapes" class="crop-content">
+            <div class="section-card">
+                <h2 class="section-title">Grapes - Stage-wise Management</h2>
+                
+                <!-- STAGE 1: Pruning & Bud Break -->
+                <div class="stage-container">
+                    <div class="stage-header">
+                        <h3>Stage 1: Pruning & Bud Break (December - January)</h3>
+                        <p>Foundation for quality grape production</p>
+                    </div>
+                    
+                    <div class="measure-section">
+                        <span class="measure-type-header protective-header">Protective Measures</span>
+                        
+                        <div class="feature-box">
+                            <h4>Pruning Schedule Optimization</h4>
+                            <p>Crop calendar guidance:</p>
+                            <ul>
+                                <li>Variety-specific pruning timing alerts</li>
+                                <li>Weather-based activity scheduling</li>
+                                <li>Cane vs spur pruning recommendations</li>
+                                <li>Pruning intensity guidance for target yield</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-box">
+                            <h4>Weather Monitoring</h4>
+                            <p>Optimal conditions for pruning:</p>
+                            <ul>
+                                <li>Temperature tracking for bud dormancy</li>
+                                <li>Rainfall alerts for timing decisions</li>
+                                <li>Frost warnings for protection measures</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="measure-section">
+                        <span class="measure-type-header corrective-header">Corrective Measures</span>
+                        
+                        <div class="feature-box">
+                            <h4>Activity Tracking</h4>
+                            <p>Daily log for pruning progress:</p>
+                            <ul>
+                                <li>Record pruning methods and intensity</li>
+                                <li>Log chemicals used for bud break</li>
+                                <li>Document vine health observations</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- STAGE 2: Flowering & Fruit Set -->
+                <div class="stage-container">
+                    <div class="stage-header">
+                        <h3>Stage 2: Flowering & Fruit Set (February - March)</h3>
+                        <p>Critical period for yield determination</p>
+                    </div>
+                    
+                    <div class="measure-section">
+                        <span class="measure-type-header protective-header">Protective Measures</span>
+                        
+                        <div class="feature-box">
+                            <h4>Disease Risk Prediction System</h4>
+                            <p>Downy and powdery mildew prevention:</p>
+                            <ul>
+                                <li>High humidity + moderate temp = downy mildew alert</li>
+                                <li>Warm days + cool nights = powdery mildew risk</li>
+                                <li>Preventive spray timing optimization</li>
+                                <li>Fungicide rotation recommendations</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-box">
+                            <h4>Soil Moisture Management</h4>
+                            <p>Critical for berry set:</p>
+                            <ul>
+                                <li>Maintains consistent moisture during flowering</li>
+                                <li>Prevents water stress affecting fruit set</li>
+                                <li>Automated irrigation scheduling</li>
+                                <li>Zone-specific moisture monitoring</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-box">
+                            <h4>Satellite Vigor Monitoring</h4>
+                            <p>NDVI analysis for vineyard health:</p>
+                            <ul>
+                                <li>Early detection of nutrient deficiencies</li>
+                                <li>Identifies stressed vines requiring attention</li>
+                                <li>Monitors canopy development</li>
+                                <li>Enables precision viticulture</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="measure-section">
+                        <span class="measure-type-header corrective-header">Corrective Measures</span>
+                        
+                        <div class="feature-box">
+                            <h4>Krishi AI Disease Diagnosis</h4>
+                            <p>Rapid identification system:</p>
+                            <ul>
+                                <li>Photo upload for disease analysis</li>
+                                <li>Identifies downy mildew, powdery mildew, anthracnose</li>
+                                <li>Severity assessment (early/moderate/severe)</li>
+                                <li>Immediate fungicide recommendations</li>
+                                <li>Organic treatment alternatives</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-box">
+                            <h4>Emergency Response System</h4>
+                            <p>Actuator control for immediate action:</p>
+                            <ul>
+                                <li>Remote irrigation activation during heat stress</li>
+                                <li>Misting system control for temperature management</li>
+                                <li>Zone-specific interventions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- STAGE 3: Berry Development & Veraison -->
+                <div class="stage-container">
+                    <div class="stage-header">
+                        <h3>Stage 3: Berry Development & Veraison (April - June)</h3>
+                        <p>Quality development and disease management</p>
+                    </div>
+                    
+                    <div class="measure-section">
+                        <span class="measure-type-header protective-header">Protective Measures</span>
+                        
+                        <div class="feature-box">
+                            <h4>Precision Water Management</h4>
+                            <p>Controlled deficit irrigation:</p>
+                            <ul>
+                                <li>Soil moisture sensors guide water application</li>
+                                <li>Balanced stress for sugar concentration</li>
+                                <li>Prevents excessive vegetative growth</li>
+                                <li>Berry size and quality optimization</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-box">
+                            <h4>Continuous Disease Monitoring</h4>
+                            <p>Weather-based risk assessment:</p>
+                            <ul>
+                                <li>Ongoing downy mildew surveillance</li>
+                                <li>Powdery mildew risk during berry development</li>
+                                <li>Botrytis risk monitoring in humid conditions</li>
+                                <li>Preventive spray schedule adjustments</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-box">
+                            <h4>Canopy Management Reminders</h4>
+                            <p>Crop calendar guidance:</p>
+                            <ul>
+                                <li>Shoot positioning for sunlight exposure</li>
+                                <li>Leaf removal timing for cluster aeration</li>
+                                <li>Cluster thinning for quality improvement</li>
+                                <li>Disease prevention through air circulation</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="measure-section">
+                        <span class="measure-type-header corrective-header">Corrective Measures</span>
+                        
+                        <div class="feature-box">
+                            <h4>Treatment Effectiveness Tracking</h4>
+                            <p>Daily log integration:</p>
+                            <ul>
+                                <li>Records all spray applications</li>
+                                <li>Monitors disease progression post-treatment</li>
+                                <li>Identifies resistant strains</li>
+                                <li>Cost-effectiveness analysis</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-box">
+                            <h4>Soil Health Restoration</h4>
+                            <p>Laboratory test integration:</p>
+                            <ul>
+                                <li>Upload soil reports for analysis</li>
+                                <li>Corrective fertilization schedules</li>
+                                <li>pH adjustment recommendations</li>
+                                <li>Micronutrient supplementation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- STAGE 4: Harvest & Post-Harvest -->
+                <div class="stage-container">
+                    <div class="stage-header">
+                        <h3>Stage 4: Harvest & Post-Harvest (July - August)</h3>
+                        <p>Timing and market optimization</p>
+                    </div>
+                    
+                    <div class="measure-section">
+                        <span class="measure-type-header protective-header">Protective Measures</span>
+                        
+                        <div class="feature-box">
+                            <h4>Harvest Timing Decision Support</h4>
+                            <p>Quality and market considerations:</p>
+                            <ul>
+                                <li>Brix level monitoring guidance</li>
+                                <li>FPO Connect for real-time market prices</li>
+                                <li>Weather forecast for harvest window</li>
+                                <li>Storage facility availability</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-box">
+                            <h4>Pre-Harvest Protection</h4>
+                            <p>Final disease prevention:</p>
+                            <ul>
+                                <li>Weather alerts for late-season disease risk</li>
+                                <li>Rain forecasts affecting harvest timing</li>
+                                <li>Post-harvest storage recommendations</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="measure-section">
+                        <span class="measure-type-header corrective-header">Corrective Measures</span>
+                        
+                        <div class="feature-box">
+                            <h4>Season Performance Analysis</h4>
+                            <p>Comprehensive review:</p>
+                            <ul>
+                                <li>Complete season data analysis</li>
+                                <li>Disease outbreak pattern identification</li>
+                                <li>Irrigation efficiency assessment</li>
+                                <li>Yield vs. expected comparison</li>
+                                <li>Infrastructure upgrade planning</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-box">
+                            <h4>Next Season Planning</h4>
+                            <p>Improvement strategies:</p>
+                            <ul>
+                                <li>Identifies vulnerable periods from past season</li>
+                                <li>Redesigns automation schedules</li>
+                                <li>Plans ventilation system installations</li>
+                                <li>Emitter upgrades for problem zones</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Added Flowchart for Grapes -->
+                <div class="flowchart-section">
+                    <h3>Grapes Growth Stages Flowchart</h3>
+                    <img src="Grape-Flow.png" alt="Grapes Growth Stages Flowchart">
+                </div>
+            </div>
+        </div>
+        
+        <!-- CROSS-CUTTING FEATURES -->
+        <div id="cross-features" class="crop-content">
+            <div class="section-card">
+                <h2 class="section-title">Cross-Cutting Features for Both Crops</h2>
+                
+                <div class="cross-features-grid">
+                    <div class="feature-card">
+                        <h4>1. Carbon Tracking & Sustainability</h4>
+                        <ul>
+                            <li>Logs all agricultural inputs (fertilizers, pesticides, fuel)</li>
+                            <li>Calculates carbon footprint per hectare</li>
+                            <li>Guides toward sustainable practices</li>
+                            <li>Identifies high-emission activities for reduction</li>
+                        </ul>
+                        <p style="margin-top: 0.8rem; color: #e74c3c; font-size: 0.9rem;"><strong>Constraint:</strong> Requires manual data entry</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>2. FPO Connect</h4>
+                        <ul>
+                            <li>Bulk input purchases (cost reduction)</li>
+                            <li>Shared equipment access</li>
+                            <li>Group insurance against crop losses</li>
+                            <li>Emergency support during outbreaks</li>
+                            <li>Collective bargaining for better prices</li>
+                        </ul>
+                        <p style="margin-top: 0.8rem; color: #e74c3c; font-size: 0.9rem;"><strong>Constraint:</strong> Requires active FPO participation</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>3. Farmer Profile & Progress</h4>
+                        <ul>
+                            <li>Health Score history tracking</li>
+                            <li>Season-over-season improvement</li>
+                            <li>Learning curve visualization</li>
+                            <li>Builds confidence through documented progress</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>4. Language Accessibility</h4>
+                        <ul>
+                            <li>English and Kannada interface</li>
+                            <li>Voice alerts for illiterate farmers</li>
+                            <li>AI Voice Assistant (no typing needed)</li>
+                            <li>Accurate technical term translations</li>
+                        </ul>
+                        <p style="margin-top: 0.8rem; color: #e74c3c; font-size: 0.9rem;"><strong>Constraint:</strong> Translation quality critical</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>5. Offline Capability</h4>
+                        <ul>
+                            <li>Cache critical data locally</li>
+                            <li>Store-and-forward for daily logs</li>
+                            <li>SMS alerts as backup</li>
+                            <li>Local weather radio integration</li>
+                        </ul>
+                        <p style="margin-top: 0.8rem; color: #e74c3c; font-size: 0.9rem;"><strong>Constraint:</strong> Most features need internet</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>6. Audio Reminders</h4>
+                        <ul>
+                            <li>Toggle between audio and visual alerts</li>
+                            <li>Immediate attention for busy farmers</li>
+                            <li>Critical alert notification system</li>
+                            <li>Privacy settings available</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- IMPLEMENTATION PRIORITY -->
+        <div id="implementation" class="crop-content">
+            <div class="section-card">
+                <h2 class="section-title">Implementation Priority Based on Impact</h2>
+                
+                <div class="tier-box">
+                    <span class="tier-label tier-1">TIER 1</span>
+                    <h4>Critical - Immediate Deployment</h4>
+                    
+                    <div class="tier-item">
+                        <strong>1. Weather + Soil Moisture Monitoring</strong>
+                        <p>Prevents irrigation disasters and optimizes water usage across all growth stages</p>
+                    </div>
+                    
+                    <div class="tier-item">
+                        <strong>2. Disease Alerts (Humidity + Temperature)</strong>
+                        <p>Saves entire crops through early warning system for bacterial blight, downy mildew, powdery mildew</p>
+                    </div>
+                    
+                    <div class="tier-item">
+                        <strong>3. Daily Log with Reminders</strong>
+                        <p>Ensures timely interventions and comprehensive activity tracking</p>
+                    </div>
+                    
+                    <div class="tier-item">
+                        <strong>4. Crop Manual Knowledge Base</strong>
+                        <p>Empowers farmers with self-learning resources and best practices for immediate decision-making</p>
+                    </div>
+                </div>
+                
+                <div class="tier-box">
+                    <span class="tier-label tier-2">TIER 2</span>
+                    <h4>High Value - Deploy Within 6 Months</h4>
+                    
+                    <div class="tier-item">
+                        <strong>5. Satellite NDVI Monitoring</strong>
+                        <p>Early stress detection provides 2-3 week advantage over visual symptoms</p>
+                    </div>
+                    
+                    <div class="tier-item">
+                        <strong>6. Actuator Control System</strong>
+                        <p>Automation reduces response time from hours to minutes</p>
+                    </div>
+                    
+                    <div class="tier-item">
+                        <strong>7. Mobile Soil Testing with Sensors</strong>
+                        <p>On-field soil analysis with instant report generation prevents nutrient disasters</p>
+                    </div>
+                    
+                    <div class="tier-item">
+                        <strong>8. Weather Forecast Integration</strong>
+                        <p>48-hour advance planning for critical farm decisions</p>
+                    </div>
+                </div>
+                
+                <div class="tier-box">
+                    <span class="tier-label tier-3">TIER 3</span>
+                    <h4>Enhancers - Deploy Within 1 Year</h4>
+                    
+                    <div class="tier-item">
+                        <strong>9. Krishi AI Complete Integration</strong>
+                        <p>Photo analysis, voice assistant, and text-based queries integrated with all farm data for comprehensive AI-powered decision support</p>
+                    </div>
+                    
+                    <div class="tier-item">
+                        <strong>10. Health Score System</strong>
+                        <p>Motivates farmers and tracks progress over multiple seasons</p>
+                    </div>
+                    
+                    <div class="tier-item">
+                        <strong>11. FPO Connect Platform</strong>
+                        <p>Community support, bulk purchasing, and improved market access</p>
+                    </div>
+                    
+                    <div class="tier-item">
+                        <strong>12. Carbon Tracker</strong>
+                        <p>Long-term sustainability monitoring and environmental responsibility</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SUCCESS METRICS -->
+        <div id="metrics" class="crop-content">
+            <div class="section-card">
+                <h2 class="section-title">Key Success Metrics to Track</h2>
+                
+                <div class="metrics-container">
+                    <div class="metric-box">
+                        <h4>Response Time</h4>
+                        <div class="metric-value">&lt; 2 hours</div>
+                        <p>Alert to Action for critical alerts</p>
+                    </div>
+                    
+                    <div class="metric-box">
+                        <h4>Yield Improvement</h4>
+                        <div class="metric-value">+15-25%</div>
+                        <p>App users vs non-users comparison</p>
+                    </div>
+                    
+                    <div class="metric-box">
+                        <h4>Cost Reduction</h4>
+                        <div class="metric-value">-20%</div>
+                        <p>Pesticide usage optimization</p>
+                    </div>
+                    
+                    <div class="metric-box">
+                        <h4>Cost Reduction</h4>
+                        <div class="metric-value">-15%</div>
+                        <p>Fertilizer usage optimization</p>
+                    </div>
+                    
+                    <div class="metric-box">
+                        <h4>Disease Control</h4>
+                        <div class="metric-value">60%</div>
+                        <p>Outbreaks caught before visible symptoms</p>
+                    </div>
+                    
+                    <div class="metric-box">
+                        <h4>User Engagement</h4>
+                        <div class="metric-value">70%</div>
+                        <p>Daily active usage of enrolled farmers</p>
+                    </div>
+                    
+                    <div class="metric-box">
+                        <h4>Alert Accuracy</h4>
+                        <div class="metric-value">&lt; 20%</div>
+                        <p>False positive rate target</p>
+                    </div>
+                    
+                    <div class="metric-box">
+                        <h4>Feature Utilization</h4>
+                        <div class="metric-value">Track All</div>
+                        <p>Identify most used features to refine focus</p>
+                    </div>
+                </div>
+                
+                <h3 style="margin-top: 2rem; margin-bottom: 1.5rem; color: #27ae60;">Final Constraints & Solutions</h3>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Constraint</th>
+                            <th>Impact</th>
+                            <th>Solution in KrishiPro App</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Internet Connectivity</td>
+                            <td>High - most features depend on it</td>
+                            <td>Cache critical data, SMS backup, offline mode for Daily Log</td>
+                        </tr>
+                        <tr>
+                            <td>Sensor Cost</td>
+                            <td>High - farmers can't afford full setup</td>
+                            <td>Tiered approach: Start with weather, add sensors progressively. FPO group purchases</td>
+                        </tr>
+                        <tr>
+                            <td>Technical Literacy</td>
+                            <td>Medium - older farmers struggle</td>
+                            <td>Voice interface (Krishi AI), vernacular language, simple icons, audio alerts</td>
+                        </tr>
+                        <tr>
+                            <td>Smartphone Availability</td>
+                            <td>Medium - not all have smartphones</td>
+                            <td>Web interface, shared village kiosk, voice-call based alerts</td>
+                        </tr>
+                        <tr>
+                            <td>Power Supply</td>
+                            <td>Medium - affects sensor operation</td>
+                            <td>Solar-powered sensors, battery backup alerts</td>
+                        </tr>
+                        <tr>
+                            <td>Data Privacy</td>
+                            <td>Low-Medium - farmers may not trust cloud</td>
+                            <td>Explain data use, keep personal info local, anonymize for analysis</td>
+                        </tr>
+                        <tr>
+                            <td>AI Accuracy</td>
+                            <td>Medium - misdiagnosis is risky</td>
+                            <td>Confidence scores shown, option to consult expert, continuous training</td>
+                        </tr>
+                        <tr>
+                            <td>Chemical Availability</td>
+                            <td>High - remote areas have supply issues</td>
+                            <td>FPO Connect links to input dealers, advance planning via Daily Log</td>
+                        </tr>
+                        <tr>
+                            <td>Labor Shortage</td>
+                            <td>High - especially at harvest</td>
+                            <td>Early alerts for planning, FPO Connect for shared labor</td>
+                        </tr>
+                        <tr>
+                            <td>Market Volatility</td>
+                            <td>High - affects harvest timing decisions</td>
+                            <td>FPO Connect provides real-time mandi prices, storage options</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showCrop(cropId) {
+            // Hide all content sections
+            const contents = document.querySelectorAll('.crop-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.crop-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected content
+            document.getElementById(cropId).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
